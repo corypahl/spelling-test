@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,66 +9,8 @@
   <h1>📚 Spelling Test 📝</h1>
   <p>Listen to each word and type the correct spelling in the box!</p>
   
-  <div class="word-list">
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('law')">🔊</button>
-      <input type="text" class="spelling-input" data-word="law" placeholder="Type word 1...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('saw')">🔊</button>
-      <input type="text" class="spelling-input" data-word="saw" placeholder="Type word 2...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('dawn')">🔊</button>
-      <input type="text" class="spelling-input" data-word="dawn" placeholder="Type word 3...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('lawn')">🔊</button>
-      <input type="text" class="spelling-input" data-word="lawn" placeholder="Type word 4...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('crawl')">🔊</button>
-      <input type="text" class="spelling-input" data-word="crawl" placeholder="Type word 5...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('come')">🔊</button>
-      <input type="text" class="spelling-input" data-word="come" placeholder="Type word 6...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('coming')">🔊</button>
-      <input type="text" class="spelling-input" data-word="coming" placeholder="Type word 7...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('they')">🔊</button>
-      <input type="text" class="spelling-input" data-word="they" placeholder="Type word 8...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('our')">🔊</button>
-      <input type="text" class="spelling-input" data-word="our" placeholder="Type word 9...">
-      <span class="result"></span>
-    </div>
-    
-    <div class="word-container">
-      <button class="audio-btn" onclick="speakWord('put')">🔊</button>
-      <input type="text" class="spelling-input" data-word="put" placeholder="Type word 10...">
-      <span class="result"></span>
-    </div>
+  <div class="word-list" id="wordListContainer">
+    <!-- Word containers will be generated here -->
   </div>
   
   <div class="buttons">
@@ -309,6 +252,35 @@
 </style>
 
 <script>
+  // Define the list of spelling words
+  const spellingWords = [
+    'law',
+    'saw', 
+    'dawn', 
+    'lawn', 
+    'crawl', 
+    'come', 
+    'coming', 
+    'they', 
+    'our', 
+    'put'
+  ];
+  
+  // Generate the word containers
+  window.onload = function() {
+    const wordListContainer = document.getElementById('wordListContainer');
+    spellingWords.forEach((word, index) => {
+      const wordContainer = document.createElement('div');
+      wordContainer.className = 'word-container';
+      wordContainer.innerHTML = `
+        <button class="audio-btn" onclick="speakWord('${word}')">🔊</button>
+        <input type="text" class="spelling-input" data-word="${word}" placeholder="Type word ${index + 1}...">
+        <span class="result"></span>
+      `;
+      wordListContainer.appendChild(wordContainer);
+    });
+  };
+  
   // Initialize voice
   let synth = window.speechSynthesis;
   
@@ -352,90 +324,3 @@
     });
     
     scoreEl.textContent = score;
-    
-    // Feedback based on score
-    if (score === 10) {
-      feedbackEl.innerHTML = "Amazing job! You're a spelling superstar! 🌟<br>Perfect score!";
-      createConfetti();
-    } else if (score >= 7) {
-      feedbackEl.innerHTML = "Great job! Keep practicing! 😃<br>You're almost there!";
-    } else if (score >= 4) {
-      feedbackEl.innerHTML = "Good try! You're learning! 👍<br>Practice makes perfect!";
-    } else {
-      feedbackEl.innerHTML = "Keep practicing, you'll get better! 💪<br>Don't give up!";
-    }
-    
-    // Disable check button after checking
-    checkBtn.disabled = true;
-    checkBtn.style.opacity = "0.7";
-  }
-  
-  function resetTest() {
-    const inputs = document.querySelectorAll('.spelling-input');
-    inputs.forEach(input => {
-      input.value = '';
-      input.classList.remove('correct', 'incorrect');
-      input.nextElementSibling.textContent = '';
-    });
-    
-    scoreEl.textContent = '0';
-    feedbackEl.innerHTML = '';
-    
-    // Re-enable check button
-    checkBtn.disabled = false;
-    checkBtn.style.opacity = "1";
-    
-    // Clear any confetti
-    confettiCtn.innerHTML = '';
-  }
-  
-  function createConfetti() {
-    const confettiCount = 100;
-    const container = document.getElementById('confettiCtn');
-    container.innerHTML = '';
-    
-    const colors = ['#ff7979', '#ffbe76', '#f6e58d', '#badc58', '#dff9fb', '#7ed6df', '#e056fd', '#686de0'];
-    
-    for (let i = 0; i < confettiCount; i++) {
-      const confetti = document.createElement('div');
-      confetti.className = 'confetti';
-      confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      
-      // Random shape
-      const shapeType = Math.floor(Math.random() * 3);
-      if (shapeType === 0) {
-        // Circle
-        confetti.style.borderRadius = '50%';
-      } else if (shapeType === 1) {
-        // Rectangle
-        confetti.style.width = Math.random() * 15 + 5 + 'px';
-        confetti.style.height = Math.random() * 8 + 5 + 'px';
-      } else {
-        // Triangle
-        confetti.style.width = '0';
-        confetti.style.height = '0';
-        confetti.style.borderLeft = '5px solid transparent';
-        confetti.style.borderRight = '5px solid transparent';
-        confetti.style.borderBottom = '10px solid ' + colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.backgroundColor = 'transparent';
-      }
-      
-      container.appendChild(confetti);
-      
-      // Animate the confetti
-      const anim = confetti.animate([
-        { transform: 'translate3d(0, 0, 0)', opacity: 1 },
-        { transform: `translate3d(${Math.random() * 100 - 50}px, ${window.innerHeight}px, 0)`, opacity: 0 }
-      ], {
-        duration: Math.random() * 3000 + 2000,
-        easing: 'cubic-bezier(0,.9,.57,1)',
-        delay: Math.random() * 2000
-      });
-      
-      anim.onfinish = () => confetti.remove();
-    }
-  }
-</script>
-</body>
-</html>
