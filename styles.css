@@ -9,7 +9,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   padding: 1rem;
-  border: 8px solid #ffd966;
+  border: 8px solid #008080;
   border-radius: 20px;
   box-sizing: border-box;
 }
@@ -52,7 +52,7 @@ button {
   padding: 0.5rem 0.8rem;
   font-size: 1.2rem;
   border: none;
-  background-color: #ffbd59;
+  background-color: #008080;
   color: #fff;
   border-radius: 10px;
   cursor: pointer;
