@@ -6,76 +6,39 @@ body {
               repeating-linear-gradient(white, white 1.8rem, #cce 1.8rem, #cce 2rem);
   background-attachment: fixed;
   color: #333;
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
   border: 8px solid #ffd966;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
   color: #2c3e50;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  margin: 1rem 0;
   text-shadow: 2px 2px #ffef99;
 }
 
 .word-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 input[type="text"] {
-  flex: 1;
+  flex: 1 1 60%;
+  min-width: 0;
   padding: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border-radius: 10px;
   border: 2px solid #ccc;
   transition: border 0.3s ease, background-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 input[type="text"]:focus {
-  outline: none;
-  border-color: #6c5ce7;
-  background-color: #f0f8ff;
-}
-
-button {
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border: none;
-  background-color: #ffbd59;
-  color: #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px #999;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #ffa502;
-}
-
-#submit-btn {
-  background-color: #00b894;
-}
-
-#submit-btn:hover {
-  background-color: #00a383;
-}
-
-#result {
-  font-size: 1.3rem;
-  margin-top: 1rem;
-  font-weight: bold;
-  color: #2d3436;
-  text-align: center;
-}
-
-.feedback-icon {
-  font-size: 1.5rem;
-}
