@@ -42,3 +42,18 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
+  outline: none;
+  border-color: #6c5ce7;
+  background-color: #f0f8ff;
+}
+
+button {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #ffbd59;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow:

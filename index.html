@@ -17,6 +17,7 @@
 
   <div style="margin-top: 2rem; text-align: center;">
     <button id="submit-btn">Submit</button>
+    <button id="reset-btn" style="margin-left: 1rem;">Reset</button>
     <p id="result"></p>
   </div>
 
@@ -61,44 +62,3 @@
           row.appendChild(button);
           container.appendChild(row);
           inputs.push({ input, correct: word });
-        });
-
-        document.getElementById('submit-btn').addEventListener('click', () => {
-          let correctCount = 0;
-
-          inputs.forEach(({ input, correct }) => {
-            const userAnswer = input.value.trim().toLowerCase();
-            const actualAnswer = correct.toLowerCase();
-
-            // Remove previous icon if exists
-            const existingIcon = input.parentNode.querySelector('.feedback-icon');
-            if (existingIcon) existingIcon.remove();
-
-            const icon = document.createElement('span');
-            icon.className = 'feedback-icon';
-            icon.style.marginLeft = '0.5rem';
-
-            if (userAnswer === actualAnswer) {
-              input.style.border = '2px solid green';
-              icon.textContent = '⭐';
-              correctCount++;
-              playSound('correct');
-            } else {
-              input.style.border = '2px solid red';
-              icon.textContent = '❌';
-              playSound('wrong');
-            }
-
-            input.parentNode.appendChild(icon);
-          });
-
-          document.getElementById('result').textContent = `You got ${correctCount} out of ${inputs.length} correct!`;
-        });
-      })
-      .catch(err => {
-        document.getElementById('spelling-list').textContent = 'Failed to load words.';
-        console.error(err);
-      });
-  </script>
-</body>
-</html>
