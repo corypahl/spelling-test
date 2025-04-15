@@ -7,15 +7,34 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Spelling Test</h1>
+  <h1>
+    <span style="font-size: 3rem;">✨</span>
+    Spelling Stars!
+    <span style="font-size: 3rem;">✨</span>
+  </h1>
+
   <div id="spelling-list">Loading words...</div>
 
-  <div style="margin-top: 2rem;">
+  <div style="margin-top: 2rem; text-align: center;">
     <button id="submit-btn">Submit</button>
+    <button id="reset-btn" style="margin-left: 1rem;">Reset</button>
     <p id="result"></p>
   </div>
 
   <script>
+    const correctAudio = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+    const wrongAudio = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
+
+    function playSound(type) {
+      if (type === 'correct') {
+        correctAudio.currentTime = 0;
+        correctAudio.play();
+      } else if (type === 'wrong') {
+        wrongAudio.currentTime = 0;
+        wrongAudio.play();
+      }
+    }
+
     fetch('words.json')
       .then(response => response.json())
       .then(words => {
@@ -52,15 +71,39 @@
             const userAnswer = input.value.trim().toLowerCase();
             const actualAnswer = correct.toLowerCase();
 
+            const existingIcon = input.parentNode.querySelector('.feedback-icon');
+            if (existingIcon) existingIcon.remove();
+
+            const icon = document.createElement('span');
+            icon.className = 'feedback-icon';
+            icon.style.marginLeft = '0.5rem';
+
             if (userAnswer === actualAnswer) {
               input.style.border = '2px solid green';
+              icon.textContent = '⭐';
               correctCount++;
+              playSound('correct');
             } else {
               input.style.border = '2px solid red';
+              icon.textContent = '❌';
+              playSound('wrong');
             }
+
+            input.parentNode.appendChild(icon);
           });
 
-          document.getElementById('result').textContent = `You got ${correctCount} out of ${inputs.length} correct.`;
+          document.getElementById('result').textContent = `You got ${correctCount} out of ${inputs.length} correct!`;
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+          inputs.forEach(({ input }) => {
+            input.value = '';
+            input.style.border = '2px solid #ccc';
+            const existingIcon = input.parentNode.querySelector('.feedback-icon');
+            if (existingIcon) existingIcon.remove();
+          });
+
+          document.getElementById('result').textContent = '';
         });
       })
       .catch(err => {

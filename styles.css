@@ -1,26 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
 body {
-  font-family: sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
+  font-family: 'Comic Neue', sans-serif;
+  background: linear-gradient(white 90%, #ccc 90%) 0 0 / 100% 2rem,
+              repeating-linear-gradient(white, white 1.8rem, #cce 1.8rem, #cce 2rem);
+  background-attachment: fixed;
+  color: #333;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 1rem;
+  border: 8px solid #008080;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin: 1rem 0;
+  text-shadow: 2px 2px #ffef99;
 }
 
 .word-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 input[type="text"] {
-  flex: 1;
+  flex: 1 1 60%;
+  min-width: 0;
   padding: 0.5rem;
-  font-size: 1rem;
-  transition: border 0.3s ease;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  transition: border 0.3s ease, background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #6c5ce7;
+  background-color: #f0f8ff;
 }
 
 button {
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  flex: 0 0 auto;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #008080;
+  color: #fff;
+  border-radius: 10px;
   cursor: pointer;
-}
+  box-shadow:
