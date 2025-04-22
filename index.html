@@ -35,7 +35,7 @@
       }
     }
 
-    fetch('words.json')
+    fetch('https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj5oZBxrVYT_gFhH6z3sVWoKUoiTosHzd1gqX5Y3WV17Ue56O4NneNylXXALpF3pu09VIO7NjttLaAZ6CXYcDrx2COsg41G7lJ2ojL9r0KJFNmEjwBHB7pArafw_Fsa8Ac0xAELYF_wPhALy3zE9mCA0bb9pA32fEMr-47J7M5sivYcFsegRnnBmJ7dEEaI2Mxeo9uB22e4szFwkawA8YMOf9ZvJoVLXfua1jGuJ4bXsWEdW1i-OaIWdhV5sEofHsa2KaABQBJ5ksFCmNLfk-0uHDvhlg&lib=MgKTW_KhxkD5VJc9plc_vdAjVn7EcitrW')
       .then(response => response.json())
       .then(words => {
         const container = document.getElementById('spelling-list');
